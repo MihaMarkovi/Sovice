@@ -30,7 +30,7 @@ public class Pozdravna implements ActionListener {
         ImageIcon ikona = new ImageIcon("sovica03.png"); //ustvari ikono 
         frame.setIconImage(ikona.getImage());   // ikonca frame-a
         ImageIcon sovica = new ImageIcon("sovica03.png"); 
-
+        
         /*# pozdrav - (!) poravnava, da je vse na sredni */ 
         JLabel pozdrav = new JLabel("Pozdravljen v Sovicah!"); //JLabel.CENTER     
         //pozdrav.setVerticalAlignment(JLabel.CENTER);
@@ -51,7 +51,7 @@ public class Pozdravna implements ActionListener {
 
         registracijaKnof.setBounds(50, 350, 200, 50);
         registracijaKnof.setFocusable(false);
-        //registracijaKnof.setOnAction(this);
+       // registracijaKnof.setOnAction(this);
 
         prijavaKnof = new JButton("Prijava");
         prijavaKnof.setBounds(255, 350, 200, 50);
@@ -85,16 +85,4 @@ public class Pozdravna implements ActionListener {
         }
     }
 }
-    
-        
-    
-
-
-
-
-    
-        
-    
-
-
 
