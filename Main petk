@@ -14,8 +14,8 @@ public class Main {
        
        
        
-       //Pozdravna poz = new Pozdravna();
+       Pozdravna poz = new Pozdravna();
       // RegisterPage registerPage = new RegisterPage(idandPasswords.getLoginInfo());
-      LoginPage loginPage = new LoginPage(idandPasswords.getLoginInfo());
+      //LoginPage loginPage = new LoginPage(idandPasswords.getLoginInfo());
     }
 }
