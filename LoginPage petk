@@ -1,5 +1,4 @@
 ## Login page
-
 import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -112,4 +111,3 @@ public class LoginPage implements ActionListener {
         }
     }
 }
-
