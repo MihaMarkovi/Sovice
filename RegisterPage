@@ -23,13 +23,15 @@ public class RegisterPage implements ActionListener {
     JLabel passwordLabel = new JLabel("Vnesite geslo :");
     JLabel ponovnoPasswordLabel = new JLabel("Ponovite geslo :");
     JLabel naslov = new JLabel("Ustvarite račun");
+    JLabel passNope;
+    JLabel passYop;
 
-    JTextField userIDField = new JTextField();
+    JTextField userIDField = new JTextField("");
     JPasswordField paswordField = new JPasswordField();
     JPasswordField ponovnoPasswordField  =new JPasswordField();
 
     JButton shraniKn = new JButton("Shrani");
-    JButton zbrisiKn = new JButton("Reset");
+    JButton zbrisiKn = new JButton("Počisti");
 
     public RegisterPage() {
         naslov.setBounds(150,20,200,50);
@@ -37,7 +39,20 @@ public class RegisterPage implements ActionListener {
 
         userIDLabel.setBounds(30,100,100,25);
         passwordLabel.setBounds(30,150,100,25);
-        ponovnoPasswordLabel.setBounds(30,200,100,25);
+        ponovnoPasswordLabel.setBounds(30,200,100,25);             
+
+        passYop = new JLabel("Uporabnik shranjen!");         //passNope
+        passYop.setBounds(30, 300, 200, 25);
+        passYop.setVisible(false);
+        passYop.setForeground(Color.GREEN);
+        passYop.setFont(new Font("Calibri", Font.PLAIN, 18));
+
+        passNope = new JLabel("Gesli se ne ujemata!");         //passNope
+        passNope.setBounds(30, 300, 200, 25);
+        passNope.setVisible(false);
+        passNope.setForeground(Color.RED);
+        passNope.setFont(new Font("Calibri", Font.PLAIN, 22));
+
         userIDField.setBounds(125,100,200,25);
         paswordField.setBounds(125,150,200,25);
         ponovnoPasswordField.setBounds(125,200,200,25);
@@ -58,6 +73,8 @@ public class RegisterPage implements ActionListener {
         frame.add(userIDLabel);
         frame.add(passwordLabel);
         frame.add(ponovnoPasswordLabel);
+        frame.add(passNope);
+        frame.add(passYop);
 
         frame.add(userIDField);
         frame.add(paswordField);
@@ -76,14 +93,39 @@ public class RegisterPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /** Reset button **/
+        /** Reset **/    //dela
         if (e.getSource() == zbrisiKn) {     //če je bil pritisnjen reset
             userIDField.setText("");            //pobriši oba polja
             paswordField.setText(""); 
             ponovnoPasswordField.setText(""); 
+            passNope.setVisible(false);         //reset napisa
+            passYop.setVisible(false);
 
         }
-                         
-                        }
+        /** shraniKn**/
+        if(!(userIDField.equals(""))) {
+            System.out.println("ass");//če je uporabnik prazn, ga opozori
+        }
+        else{
+            System.out.println("Ni uporabnika");
+        }
 
+        if ((e.getSource()==shraniKn)){
+            String userID = userIDField.getText();                      //kar podas v polje shrani v userID in password
+            String password = String.valueOf(paswordField.getPassword());    //dobi password, pretvori v string in shrani password
+            String password2 = String.valueOf(ponovnoPasswordField.getPassword());
+            if(password.equals(password2)) {
+                System.out.println("Geslo se ujema");
+                passNope.setVisible(false);     //da se ne prekrije
+                passYop.setVisible(true);
+            }
+            else {
+                System.out.println("Preverite vnešeno geslo...");
+                passYop.setVisible(false);
+                passNope.setVisible(true);
+                /** shrani v hashmap **/
+            }
+        }
+
+    }
 }
