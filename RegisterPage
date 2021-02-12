@@ -13,10 +13,77 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
-public class LoginPage implements ActionListener {
+public class RegisterPage implements ActionListener {
 
-    JFrame frame = new JFrame("Prijavna stran");
-    JLabel messageLabel = new JLabel();
-    
+    /** estetika **/
+    JFrame frame = new JFrame("Registracija");
+    ImageIcon image = new ImageIcon("sovica03.png"); //ustvari ikono
+
+    JLabel userIDLabel = new JLabel("Vnesite ime :");
+    JLabel passwordLabel = new JLabel("Vnesite geslo :");
+    JLabel ponovnoPasswordLabel = new JLabel("Ponovite geslo :");
+    JLabel naslov = new JLabel("Ustvarite račun");
+
     JTextField userIDField = new JTextField();
-    JPasswordField userPasswordField = new JPasswordField();
+    JPasswordField paswordField = new JPasswordField();
+    JPasswordField ponovnoPasswordField  =new JPasswordField();
+
+    JButton shraniKn = new JButton("Shrani");
+    JButton zbrisiKn = new JButton("Reset");
+
+    public RegisterPage() {
+        naslov.setBounds(150,20,200,50);
+        naslov.setFont(new Font("Calibri", Font.PLAIN, 25));    //izlepšaj
+
+        userIDLabel.setBounds(30,100,100,25);
+        passwordLabel.setBounds(30,150,100,25);
+        ponovnoPasswordLabel.setBounds(30,200,100,25);
+        userIDField.setBounds(125,100,200,25);
+        paswordField.setBounds(125,150,200,25);
+        ponovnoPasswordField.setBounds(125,200,200,25);
+
+        /*# knof **/
+
+        /** shrani **/
+        shraniKn.setBounds(30, 250, 100, 25);
+        shraniKn.setFocusable(false);
+        shraniKn.addActionListener(this);
+        /** zbrisi **/
+        zbrisiKn.setBounds(255,250 , 100, 25);
+        zbrisiKn.setFocusable(false);
+        zbrisiKn.addActionListener(this);
+
+        /** dodajanje **/
+        frame.add(naslov);
+        frame.add(userIDLabel);
+        frame.add(passwordLabel);
+        frame.add(ponovnoPasswordLabel);
+
+        frame.add(userIDField);
+        frame.add(paswordField);
+        frame.add(ponovnoPasswordField);
+
+        frame.add(shraniKn);
+        frame.add(zbrisiKn);
+
+        //frame.setIconImage(sovica.getImage());
+        frame.setSize(420,420);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        /** Reset button **/
+        if (e.getSource() == zbrisiKn) {     //če je bil pritisnjen reset
+            userIDField.setText("");            //pobriši oba polja
+            paswordField.setText(""); 
+            ponovnoPasswordField.setText(""); 
+
+        }
+                         
+                        }
+
+}
