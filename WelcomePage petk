@@ -29,6 +29,5 @@ public class WelcomePage
         frame.setVisible(true);
     }
 }
-
 // program dejansko ne naredi dost velik
 // tole se preimenuje v aplikacijo2
