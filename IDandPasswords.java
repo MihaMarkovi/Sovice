@@ -1,6 +1,3 @@
-##končana ID and passwords, komentirana
-
-
 import java.util.HashMap;
 
 public class IDandPasswords {

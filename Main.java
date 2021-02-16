@@ -1,7 +1,6 @@
-## Main - končna
-Urejeno in komentirano
+//Urejeno in komentirano
 
-koda:
+//koda:
 
 import javax.swing.ImageIcon;
 

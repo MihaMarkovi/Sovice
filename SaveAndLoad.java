@@ -1,6 +1,3 @@
-## Save and Load
-
-
 /**
  * Write a description of class Shranjevanje here.
  *
