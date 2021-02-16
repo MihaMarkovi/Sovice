@@ -1,0 +1,82 @@
+## pozdravna
+
+import java.util.HashMap;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+
+/*
+ * Okno namenjeno 'prihodu' v program. Uporabnik ima na voljo 2 možnosti. Če nima 'računa', ga lahko ustvari. Če ga ima, se lahko samo prijavi.
+ * Ob pritiski na ustrezen gumb se zažene ustrezno okno.
+ */
+public class Pozdravna implements ActionListener {
+    JFrame frame;
+    JButton registracijaKnof;
+    JButton prijavaKnof;
+    JLabel pozdrav;
+    JLabel slikaSove;
+    public Pozdravna() {
+        frame = new JFrame("Pozdravna stran!");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   //da se zapre ko klikns x
+        frame.setSize(500,500);                                 //velikost okvirja
+        frame.getContentPane().setBackground(new Color(160,165,230));
+        frame.setResizable(false);                              //okno je fiksne velikosti
+
+        ImageIcon ikona = new ImageIcon("sovica03.png"); //ustvari ikono 
+        frame.setIconImage(ikona.getImage());   // ikonca frame-a
+        ImageIcon sovica = new ImageIcon("sovica03.png"); 
+
+        /** pozdravni message */ 
+        JLabel pozdrav = new JLabel("Pozdravljen v Sovicah!"); //JLabel.CENTER     
+
+        pozdrav.setFont(new Font("Comic Sans",Font.ITALIC, 25));
+        pozdrav.setBounds(100, 100, 300, 50);
+
+        /*# slika (!) dodat **/
+        //sovica.setBounds(100, 175, 300, 250));
+
+        /** knofi **/
+        registracijaKnof = new JButton("Registracija");
+
+        registracijaKnof.setBounds(50, 350, 200, 50);
+        registracijaKnof.setFocusable(false);
+        registracijaKnof.addActionListener(this);
+
+        prijavaKnof = new JButton("Prijava");
+        prijavaKnof.setBounds(255, 350, 200, 50);
+        prijavaKnof.setFocusable(false);
+        prijavaKnof.addActionListener(this);
+
+        /**------dodajanje na frame---------**/
+        frame.add(pozdrav); 
+        frame.add(registracijaKnof);
+        frame.add(prijavaKnof); 
+
+        frame.setLocationRelativeTo(null);                      //odpre na sredini
+        frame.setLayout(null);                                         
+        frame.setVisible(true);                                 //da se prižge
+
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == registracijaKnof) {
+            RegisterPage reg = new RegisterPage();               //odpremo RegisterPage
+        }
+
+        if(e.getSource() == prijavaKnof) {
+            frame.dispose(); 
+            LoginPage log = new LoginPage(IDandPasswords.getLoginInfo());    //odpremo LoginPage in ji damo hashmap imen in gesel
+        }
+    }
+}
+
+    
+

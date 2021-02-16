@@ -1,0 +1,27 @@
+#pove ker del je naroeb
+
+   
+                            /** Login button **/
+                            if (e.getSource()==loginButton) {
+                                String userID = userIDField.getText();                  //kar podas v polje shrani v userID in password
+                                String password = String.valueOf(userPasswordField.getPassword());    //dobi password, pretvori v string in shrani password
+                                /** preveri, ali se tvoji podatki ujemajo s tistimi v HashMap-u **/
+                                if(logininfo.containsKey(userID))  {                //Username pravilen
+                                    if(logininfo.get(userID).equals(password)) {    //geslo pravilno
+                                        messageLabel.setForeground(Color.green);
+                                        messageLabel.setText("Login successful");
+                    
+                                        frame.dispose();    //da se ugasne login page
+                    
+                                        WelcomePage welcomePage = new WelcomePage(userID);    //da se prizge welcome page
+                                    }
+                                    else {
+                                        messageLabel.setForeground(Color.red);     //username taprav ampak geslo napačno
+                                        messageLabel.setText("Wrong password!");
+                                    }
+                                }
+                                else {
+                                    messageLabel.setForeground(Color.red);          //username-a ni v HashMap-u
+                                    messageLabel.setText("Username not found!");
+                                }
+                            }

@@ -1,0 +1,12 @@
+##Test run
+
+(Da ne prčkam po main-u)
+
+public class testRun {
+    public static void main(String[] arggs) {
+      
+     RegisterPage reg = new RegisterPage();
+     
+     //Pozdravna poz = new Pozdravna();
+    }
+}

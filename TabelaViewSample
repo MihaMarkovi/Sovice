@@ -1,0 +1,200 @@
+# TabelaViewSample - nedelja
+Problem v 30-33 vrstici, v classu Person je private access. ne dela.
+
+24.01.2021 23:28
+
+Koda:
+
+import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+//import javax.swing.ImageIcon;
+//ImageIcon icon = new ImageIcon("sovica03.png");   //ikonca - kako to vključit na stage
+//frame.setIconImage(image.getImage());
+
+public class TableViewSample extends Application {    
+
+    /*
+     * to je array, kamor se pišejo ljudje.
+     */
+    private TableView table = new TableView();  //objekt TableView 
+    private final ObservableList<Person> data= FXCollections.observableArrayList(
+            new Person("Michael", "Scofield", "michael.scofield92@gmail.com", 65),         
+            new Person("Sara", "Prah", "Sara25@gmail.com", 67),
+            new Person("Hector", "Salamanca", "fernandosucre@gmail.com",49),
+            new Person("Upam", "Dadela", "upam.da@dela.com",97),
+            new Person("Dušan", "Stojčić", "duskod.stojan@gmail.com", 5)
+        );
+
+        final HBox hb = new HBox();     //horizontal box
+    public static void main(String [] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage){
+        Scene scene = new Scene(new Group());
+        stage.setTitle("To so Sovice");     //naslov tabele
+        //stage.setWidth(500);                /*#velikost tabele*/
+        //stage.setHeight(500);
+
+        final Label label = new Label("Dobrodošli v Sovicah!");     // naslov tabele
+        label.setFont(new Font("Arial", 20));    //tip, velikost
+
+        table.setEditable(true);    //lahko editas
+
+        /** poimenovanje stolpcev in referenca podatkov na stolpec**/
+        TableColumn firstNameCol = new TableColumn("First Name");
+        firstNameCol.setMinWidth(100);      //nastaviš min širino stolpca
+        firstNameCol.setCellValueFactory(
+            new PropertyValueFactory<Person, String>("firstName"));     //referenca
+
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        lastNameCol.setMinWidth(100);        
+        lastNameCol.setCellValueFactory(
+            new PropertyValueFactory<Person, String>("lastName"));
+
+        TableColumn emailCol = new TableColumn("E-mail");
+        emailCol.setMinWidth(200);
+        emailCol.setCellValueFactory(
+            new PropertyValueFactory<Person, String>("email"));
+
+        TableColumn veseljeCol = new TableColumn("Veselje");
+        veseljeCol.setMinWidth(50);
+        veseljeCol.setCellValueFactory(
+            new PropertyValueFactory<Person, Integer>("vesel"));
+
+        /**da vrže podatke not **/
+        table.setItems(data);
+        table.getColumns().addAll(firstNameCol,lastNameCol, emailCol, veseljeCol);
+
+        /*# Dodajanje novih vnosov **/
+       
+
+        
+        final TextField addFirstName = new TextField();
+        addFirstName.setPromptText("Vnesi ime");
+        addFirstName.setMaxWidth(firstNameCol.getPrefWidth());
+        final TextField addLastName = new TextField();
+        addLastName.setMaxWidth(lastNameCol.getPrefWidth());
+        addLastName.setPromptText("Vnesi priimek");
+        final TextField addEmail = new TextField();
+        addEmail.setMaxWidth(emailCol.getPrefWidth());
+        addEmail.setPromptText("Email");
+
+        final TextField addVeselje = new TextField();
+        addVeselje.setMaxWidth(veseljeCol.getPrefWidth());
+        addVeselje.setPromptText("Koliko si vesel");
+        
+        
+        final Button addButton = new Button("Dodaj novega uporabnika");
+        addButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                data.add(new Person(
+                        addFirstName.getText(),
+                        addLastName.getText(),
+                        addEmail.getText(),
+                        Integer.valueOf(addVeselje.getText())));
+                addFirstName.clear();
+                addLastName.clear();
+                addEmail.clear();
+                addVeselje.clear();
+            }
+        });
+       
+        
+       hb.getChildren().addAll(addFirstName, addLastName, addEmail, addButton, addVeselje);
+       hb.setSpacing(3);
+        
+        /** vidnost stolpcev **/
+        firstNameCol.setVisible(true);
+        lastNameCol.setVisible(true);
+        emailCol.setVisible(true);
+        veseljeCol.setVisible(true);
+
+       
+        /** vertical box **/
+
+        final VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(10,10,10,10));   //rob od tabele do roba okna
+        vbox.getChildren().addAll (label, table);
+        
+        
+
+        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+
+        stage.setScene(scene);  /*#(a je nujno na konc?)*/
+        stage.setResizable(false);
+        stage.sizeToScene();    //da je okno dovolj veliko
+        stage.show();   //da se vidi. to morš vklopit 
+
+    }
+
+    public static class Person {        
+        private final SimpleStringProperty firstName;
+        private final SimpleStringProperty lastName;
+        private final SimpleStringProperty email;
+        private final SimpleIntegerProperty veselje;     //---> ne dela ker je int, ne da se mi trenutno iskat
+
+        public Person(String fName, String lName, String email, int vesel) {  /* konstruktor za osebo */
+            this.firstName = new SimpleStringProperty(fName);
+            this.lastName = new SimpleStringProperty(lName);
+            this.email = new SimpleStringProperty(email);
+            this.veselje = new SimpleIntegerProperty(vesel);
+        }
+
+        /** setter**/
+        public void setFirstName(String fName){
+            firstName.set(fName);}
+
+        public void setLastName(String lName){
+            lastName.set(lName);}
+
+        public void setEmail(String fName){
+            email.set(fName);}  
+
+        public void setVeselje(int vesel) {
+            veselje.set(vesel);}
+
+        /** getter **/
+        public String getFirstName() {
+            return firstName.get();}
+
+        public String getLastName() {
+            return lastName.get();}
+
+        public String getEmail() {
+            return email.get();}
+
+        public int getVeselje() {
+            return veselje.get();}
+
+        
+
+    }
+}
+
+
+
+
