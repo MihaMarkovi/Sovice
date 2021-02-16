@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=RegisterPage
-comment1.params=
-comment1.target=RegisterPage()
-comment2.params=e
-comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
-numComments=3
