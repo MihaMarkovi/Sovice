@@ -1,6 +1,7 @@
-## register Page - končna
-import java.io.FileWriter;  /** importi **/
+## register Page - končnaimport java.io.FileWriter;
 import java.io.IOException;
+//import java.io.
+
 
 import java.util.HashMap;
 import java.awt.event.ActionListener;
@@ -28,11 +29,11 @@ public class RegisterPage implements ActionListener {
     JLabel passNope;
     JLabel passYop;
 
-    JTextField userIDField = new JTextField("");    
+    JTextField userIDField = new JTextField("");
     JPasswordField paswordField = new JPasswordField();
     JPasswordField ponovnoPasswordField  =new JPasswordField();
 
-    JButton shraniKn = new JButton("Shrani");   //dva knofka
+    JButton shraniKn = new JButton("Shrani");
     JButton zbrisiKn = new JButton("Počisti");
 
     public RegisterPage() {
@@ -43,16 +44,16 @@ public class RegisterPage implements ActionListener {
         passwordLabel.setBounds(30,150,100,25);
         ponovnoPasswordLabel.setBounds(30,200,100,25);             
 
-        passYop = new JLabel("Uporabnik shranjen!");         //passYop - geslo je pravilno
+        passYop = new JLabel("Uporabnik shranjen!");         //passNope
         passYop.setBounds(30, 300, 200, 25);
         passYop.setVisible(false);
-        passYop.setForeground(Color.GREEN);                 //prijazno
+        passYop.setForeground(Color.GREEN);
         passYop.setFont(new Font("Calibri", Font.PLAIN, 18));
 
-        passNope = new JLabel("Gesli se ne ujemata!");         //passNope   - geslo ni pravilno
+        passNope = new JLabel("Gesli se ne ujemata!");         //passNope
         passNope.setBounds(30, 300, 200, 25);
         passNope.setVisible(false);
-        passNope.setForeground(Color.RED);                      //neprijazno
+        passNope.setForeground(Color.RED);
         passNope.setFont(new Font("Calibri", Font.PLAIN, 22));
 
         userIDField.setBounds(125,100,200,25);
@@ -85,7 +86,7 @@ public class RegisterPage implements ActionListener {
         frame.add(shraniKn);
         frame.add(zbrisiKn);
 
-       
+        //frame.setIconImage(sovica.getImage());
         frame.setSize(420,420);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,33 +96,28 @@ public class RegisterPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /** Reset **/    //knof če narobe vpišeš stvari in se ti ne da brisat vseh polj posebaj
+        /** Reset **/    //dela
         if (e.getSource() == zbrisiKn) {     //če je bil pritisnjen reset
-            userIDField.setText("");            //pobriši vsa polja
+            userIDField.setText("");            //pobriši oba polja
             paswordField.setText(""); 
             ponovnoPasswordField.setText(""); 
-            passNope.setVisible(false);         //oba napisa zbriše, začneš 'znova'
+            passNope.setVisible(false);         //reset napisa
             passYop.setVisible(false);
 
         }
-        /** shraniKn**/
-        
         if ((e.getSource()==shraniKn)){
-            String userID = userIDField.getText();                           //podano se shrani v userID in password
-            String password = String.valueOf(paswordField.getPassword());   //dobi password, pretvori v string in shrani password
+            String userID = userIDField.getText();                      //podano se shrani v userID in password
+            String password = String.valueOf(paswordField.getPassword());                                   //dobi password, pretvori v string in shrani password
             String password2 = String.valueOf(ponovnoPasswordField.getPassword());
             if(password.equals(password2)) {            /** passworda se ujemata**/
-                IDandPasswords.addIDAndPass(userID, password2);
+                IDandPasswords.addIDAndPass(userID, password2); /** shrani v hashmap **/
                 /** napiše Nope al Yop **/
                 passNope.setVisible(false);     //da se ne prekrije
                 passYop.setVisible(true);
                 
-                /** shrani **/
-                
-              frame.dispose();  //ugasne frame
-              
+                frame.dispose();
             }
-            else {                                       /** se ne ujemata **/
+            else {  /** se ne ujemata **/
                 System.out.println("Preverite vnešeno geslo...");
                 passYop.setVisible(false);
                 passNope.setVisible(true);
