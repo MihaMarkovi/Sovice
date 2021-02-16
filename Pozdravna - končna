@@ -3,6 +3,11 @@
 import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.Container;
+import java.io.*;
+import javax.imageio.*;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -54,6 +59,25 @@ public class Pozdravna implements ActionListener {
         prijavaKnof.setBounds(255, 350, 200, 50);
         prijavaKnof.setFocusable(false);
         prijavaKnof.addActionListener(this);
+        
+        
+        JLabel image = new JLabel();
+        image.setBounds(150, 150, 200, 175);
+        
+        img = null;
+        try {
+            img = ImageIO.read(new File("sovica03.png"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Image dimg = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon imgIcon = new ImageIcon(dimg);
+        image.setIcon(imgIcon);
+        
+        /**------dodajanje na frame---------**/
+        
+        frame.add(image);
 
         /**------dodajanje na frame---------**/
         frame.add(pozdrav); 
